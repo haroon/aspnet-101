@@ -1,15 +1,16 @@
-using mef.Common.Interfaces;
+using mef.Common.Abstract;
 using System.Composition;
 
 namespace mef.Plugins.Plugins;
 
-[Export(typeof(IPlugin))]
-public class CollatzPlugin : IPlugin
+[Export(typeof(AbstractPlugin))]
+public class CollatzPlugin : AbstractPlugin
 {
-    public string GetName() => "collatz";
-    public int GetId() => 0;
+    public override string GetName() => "collatz";
+    public override string GetDescription() => "Generate Collatz sequence for a number";
+    public override int GetId() => 0;
 
-    public object DoTheThing(Dictionary<string, object> parameters)
+    public override object DoTheThing(Dictionary<string, object> parameters)
     {
         if (parameters.TryGetValue("num", out var numObj) &&
             int.TryParse(numObj?.ToString(), out var Num))

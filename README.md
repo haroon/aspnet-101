@@ -73,12 +73,14 @@ There are three endpoints.
 ### getall
 
 * http://localhost:5199/plugin/getall
-  Returns a list of plugins in format `"plugin name": "plugin id"`
+
+Returns a list of plugins in format `<plugin_name> (<plugin_ID>): <plugin_description>`
 
 ### byid
 
 * http://localhost:5199/plugin/byid
-  Run the plugin by ID.
+
+Run the plugin by ID.
 
 #### Example input
 
@@ -94,7 +96,8 @@ There are three endpoints.
 ### byname
 
 * http://localhost:5199/plugin/byname
-  Run the plugin by name.
+
+Run the plugin by name.
 
 #### Example input
 

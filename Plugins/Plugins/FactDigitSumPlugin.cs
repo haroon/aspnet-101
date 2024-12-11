@@ -1,16 +1,17 @@
-using mef.Common.Interfaces;
+using mef.Common.Abstract;
 using System.Composition;
 using System.Numerics;
 
 namespace mef.Plugins.Plugins;
 
-[Export(typeof(IPlugin))]
-public class FactDigitSumPlugin : IPlugin
+[Export(typeof(AbstractPlugin))]
+public class FactDigitSumPlugin : AbstractPlugin
 {
-    public string GetName() => "factdigitsum";
-    public int GetId() => 1;
+    public override string GetName() => "factdigitsum";
+    public override string GetDescription() => "Return the sum of all digits of factorial of a number";
+    public override int GetId() => 1;
 
-    public object DoTheThing(Dictionary<string, object> parameters)
+    public override object DoTheThing(Dictionary<string, object> parameters)
     {
         if (parameters.TryGetValue("num", out var numObj) &&
             int.TryParse(numObj?.ToString(), out var Num))
