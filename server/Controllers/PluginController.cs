@@ -1,9 +1,8 @@
 using System.Composition.Hosting;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using mef.Common.Interfaces;
 using mef.Common.Data;
-using System.Composition;
+using mef.Common.Abstract;
 
 namespace mef.server.Controllers;
 
@@ -23,13 +22,13 @@ public class PluginController : ControllerBase
     [HttpGet("getall")]
     public IActionResult GetPlugins()
     {
-        return Ok(_compositionHost.GetExports<IPlugin>().Select(p => p.GetName() + " : " + p.GetId()));
+        return Ok(_compositionHost.GetExports<AbstractPlugin>().Select(p => p.ToString()));
     }
 
     [HttpPost("byid")]
     public IActionResult ExecutePluginById([FromBody] PluginRequest request)
     {
-        var plugin = _compositionHost.GetExports<IPlugin>().FirstOrDefault(p => p.GetId() == request.PluginId);
+        var plugin = _compositionHost.GetExports<AbstractPlugin>().FirstOrDefault(p => p.GetId() == request.PluginId);
         if (plugin == null)
         {
             return NotFound($"Plugin '{request.PluginId}' not found.");
@@ -41,7 +40,7 @@ public class PluginController : ControllerBase
     [HttpPost("byname")]
     public IActionResult ExecutePluginByName([FromBody] PluginRequest request)
     {
-        var plugin = _compositionHost.GetExports<IPlugin>().FirstOrDefault(p => p.GetName().ToLower() == request.PluginName.ToLower());
+        var plugin = _compositionHost.GetExports<AbstractPlugin>().FirstOrDefault(p => p.GetName().ToLower() == request.PluginName.ToLower());
         if (plugin == null)
         {
             return NotFound($"Plugin '{request.PluginName}' not found.");
@@ -50,7 +49,7 @@ public class PluginController : ControllerBase
         return RunPlugin(plugin, request.Parameters);
     }
 
-    private IActionResult RunPlugin(IPlugin? plugin, Dictionary<string, object> parameters)
+    private IActionResult RunPlugin(AbstractPlugin? plugin, Dictionary<string, object> parameters)
     {
         try
         {
