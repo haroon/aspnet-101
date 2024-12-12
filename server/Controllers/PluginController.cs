@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using mef.Common.Data;
 using mef.Common.Abstract;
+using System.Linq;
 
 namespace mef.server.Controllers;
 
@@ -22,7 +23,7 @@ public class PluginController : ControllerBase
     [HttpGet("getall")]
     public IActionResult GetPlugins()
     {
-        return Ok(_compositionHost.GetExports<AbstractPlugin>().Select(p => p.ToString()));
+        return Ok(_compositionHost.GetExports<AbstractPlugin>().OrderBy(p => p.GetId()).Select(p => p.ToString()));
     }
 
     [HttpPost("byid")]

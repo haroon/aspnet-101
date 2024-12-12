@@ -1,3 +1,4 @@
+using Common.Types;
 using mef.Common.Abstract;
 using System.Composition;
 
@@ -6,9 +7,11 @@ namespace mef.Plugins.Plugins;
 [Export(typeof(AbstractPlugin))]
 public class CollatzPlugin : AbstractPlugin
 {
-    public override string GetName() => "collatz";
+    public CollatzPlugin() : base(PluginType.collatz)
+    {
+    }
+
     public override string GetDescription() => "Generate Collatz sequence for a number";
-    public override int GetId() => 0;
 
     public override object DoTheThing(Dictionary<string, object> parameters)
     {
