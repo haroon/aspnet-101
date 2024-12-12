@@ -1,3 +1,4 @@
+using Common.Types;
 using mef.Common.Abstract;
 using System.Composition;
 
@@ -6,9 +7,11 @@ namespace mef.Plugins.Plugins;
 [Export(typeof(AbstractPlugin))]
 public class BitPrintPlugin : AbstractPlugin
 {
-    public override string GetName() => "bitprint";
+    public BitPrintPlugin() : base(PluginType.bitprint)
+    {
+    }
+
     public override string GetDescription() => "Convert an integer to bits";
-    public override int GetId() => 4;
 
     public override object DoTheThing(Dictionary<string, object> parameters)
     {

@@ -12,7 +12,7 @@ public class Startup
 
         // Register MEF parts
         var configuration = new ContainerConfiguration()
-            .WithAssemblies([Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly(), PluginsAssembly.Value, CommonAssembly.Value]);
+            .WithAssemblies([Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly(), PluginsAssembly.Value]);
         var container = configuration.CreateContainer();
         services.AddSingleton(container);
     }

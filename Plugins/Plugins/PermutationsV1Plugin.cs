@@ -1,3 +1,4 @@
+using Common.Types;
 using mef.Common.Abstract;
 using System.Composition;
 using System.Numerics;
@@ -7,9 +8,11 @@ namespace mef.Plugins.Plugins;
 [Export(typeof(AbstractPlugin))]
 public class PermutationsPluginV1 : AbstractPlugin
 {
-    public override string GetName() => "permutations_v1";
+    public PermutationsPluginV1() : base(PluginType.permutations_v1)
+    {
+    }
+
     public override string GetDescription() => "Implementation of Heap's algorithm to get all possible permutations for a list of strings using recursion";
-    public override int GetId() => 3;
     private List<string> permutations = new List<string>();
 
     public override object DoTheThing(Dictionary<string, object> parameters)
