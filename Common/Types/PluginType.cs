@@ -12,6 +12,7 @@ namespace Common.Types
         collatz,
         factdigitsum,
         permutations_v1,
-        bitprint
+        bitprint,
+        fibonacci
     }
 }
